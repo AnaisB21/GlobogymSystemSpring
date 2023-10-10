@@ -3,16 +3,16 @@ package fr.m2i.globogymsystemspring.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+
 
 @Entity
-@Table(name="coach")
+@Table(name="cours")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Coach {
+public class Cours {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +22,11 @@ public class Coach {
     private String nom;
 
     @Column
-    private String prenom;
+    private Date date;
 
-    @OneToMany(mappedBy = "coach", cascade=CascadeType.ALL)
-    private List<Cours> listCours = new ArrayList<>();
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="coach_id")
+    private Coach coach;
 
+    //@JoinTable avec réservation comme table de jointure cours id, client id
 }
