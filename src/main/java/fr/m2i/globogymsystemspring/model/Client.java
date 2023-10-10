@@ -2,10 +2,13 @@ package fr.m2i.globogymsystemspring.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table (name="client")
-@Data
+@Getter
+@Setter
 public class Client {
 
     @Id
@@ -17,4 +20,5 @@ public class Client {
 
     @Column
     private String prenom;
+
 }
