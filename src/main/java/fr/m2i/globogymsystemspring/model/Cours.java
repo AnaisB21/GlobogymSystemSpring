@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -24,9 +26,11 @@ public class Cours {
     @Column
     private Date date;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="coach_id")
     private Coach coach;
 
-    //@JoinTable avec réservation comme table de jointure cours id, client id
+    @ManyToMany(mappedBy = "cours", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Client> clients = new ArrayList<>();
+
 }
