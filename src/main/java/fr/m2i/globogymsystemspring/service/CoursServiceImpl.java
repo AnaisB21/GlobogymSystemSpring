@@ -2,6 +2,8 @@ package fr.m2i.globogymsystemspring.service;
 
 import fr.m2i.globogymsystemspring.model.Cours;
 import fr.m2i.globogymsystemspring.repository.CoursRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
