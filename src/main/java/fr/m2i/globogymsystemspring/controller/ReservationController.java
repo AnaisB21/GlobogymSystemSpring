@@ -37,12 +37,19 @@ public class ReservationController {
 
     //méthode pour traiter le formulaire d'ajout
     @PostMapping("/index_reservation/new_reservation/{id}")
-    public String addClientToCours(@PathVariable(value = "id") long id, @RequestParam("clientId") long clientId) {
+    public String addClientToCours(@PathVariable(value = "id") long id, @RequestParam("clientId") long clientId, Model model) {
         Cours cours = coursService.getCoursById(id);
         Client client = clientService.getClientById(clientId);
-        cours.getClients().add(client);
-        client.getCours().add(cours); //+
-        coursService.saveCours(cours);
+
+        if (cours.getClients().size() < 5) {
+            cours.getClients().add(client);
+            client.getCours().add(cours); //+
+            coursService.saveCours(cours);
+        } else {
+            model.addAttribute("errorMessage", "Le cours est complet. Vous ne pouvez pas ajouter plus de clients.");
+            return "redirect:/index_reservation";
+
+        }
         return "redirect:/index_reservation";
     }
 
