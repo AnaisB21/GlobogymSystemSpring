@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Clock;
+
 @Controller
 public class ReservationController {
 
@@ -27,7 +29,12 @@ public class ReservationController {
 
     //méthode pour afficher la page d'ajout de client au cours
     @GetMapping("/index_reservation/new_reservation/{id}")
-    public String newReservationForm(@PathVariable(value = "id") long id, Model model) {
+    public String newReservationForm(@PathVariable(value = "id") long id, Model model, @RequestParam(value = "full", required = false) boolean errorfullcours) {
+
+        if(errorfullcours) {
+            model.addAttribute("errorMessage", "Le cours est complet. Vous ne pouvez pas ajouter plus de clients.");
+
+        }
         Cours cours = coursService.getCoursById(id);
         model.addAttribute("cours", cours);
         model.addAttribute("clients", clientService.getAllClients()); // on récupère tous les clients disponibles
@@ -41,16 +48,21 @@ public class ReservationController {
         Cours cours = coursService.getCoursById(id);
         Client client = clientService.getClientById(clientId);
 
-        if (cours.getClients().size() < 5) {
+        if(cours.getClients().contains(client) || client.getCours().contains(cours)) {
+            model.addAttribute("errorMessage", "Ce client est déjà inscrit à ce cours.");
+            return "index_reservation/new_reservation/{id}";
+
+        } else if (cours.getClients().size() < 5) {
+            System.out.println("ok");
             cours.getClients().add(client);
             client.getCours().add(cours); //+
             coursService.saveCours(cours);
-        } else {
-            model.addAttribute("errorMessage", "Le cours est complet. Vous ne pouvez pas ajouter plus de clients.");
             return "redirect:/index_reservation";
+        } else {
 
+            return "redirect:/index_reservation/new_reservation/{id}?full=true";//
         }
-        return "redirect:/index_reservation";
+
     }
 
     //afficher les clients inscrits au cours

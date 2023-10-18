@@ -12,6 +12,11 @@
     <div class="container">
         <h1>Réservation client au cours : <br> > <span th:text="${cours.nom}"></span></h1>
         <br>
+
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
         <form th:action="@{/index_reservation/new_reservation/{id}(id=${cours.id})}" method="post">
             <div class="form-group">
                 <label for="clientId">Sélectionnez un client:</label>
