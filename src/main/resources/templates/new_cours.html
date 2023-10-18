@@ -15,7 +15,14 @@
     <h2>Ajout cours</h2>
 
     <form action="#" th:action="@{/saveCours}" th:object="${cours}" method="POST">
-      <input type="text" th:field="*{nom}" placeholder="Nom cours" class="form-control mb-4 col-4">
+      <select th:field="*{nom}" placeholder="Nom cours" class="form-control mb-4 col-4">
+          <option value=""> Sélectionner un type de cours</option>
+          <option value="Zumba">Zumba</option>
+          <option value="Pilates">Pilates</option>
+          <option value="Yoga">Yoga</option>
+          <option value="Aerobic">Aerobic</option>
+          <option value="Musculation">Musculation</option>
+      </select>
 
       <input type="date" th:field="*{date}" placeholder="Date cours" class="form-control mb-4 col-4">
 
