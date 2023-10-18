@@ -29,12 +29,14 @@ public class ReservationController {
 
     //méthode pour afficher la page d'ajout de client au cours
     @GetMapping("/index_reservation/new_reservation/{id}")
-    public String newReservationForm(@PathVariable(value = "id") long id, Model model, @RequestParam(value = "full", required = false) boolean errorfullcours) {
+    public String newReservationForm(@PathVariable(value = "id") long id, Model model, @RequestParam(value = "full", required = false) boolean errorfullcours, @RequestParam(value = "same", required = false) boolean errorsameclient)  {
 
         if(errorfullcours) {
-            model.addAttribute("errorMessage", "Le cours est complet. Vous ne pouvez pas ajouter plus de clients.");
-
+            model.addAttribute("errorMessage", "Le cours est complet. Vous ne pouvez pas ajouter de nouveaux clients.");
+        } else if(errorsameclient) {
+            model.addAttribute("errorMessage", "Ce client est déjà inscrit à ce cours.");
         }
+
         Cours cours = coursService.getCoursById(id);
         model.addAttribute("cours", cours);
         model.addAttribute("clients", clientService.getAllClients()); // on récupère tous les clients disponibles
@@ -44,23 +46,19 @@ public class ReservationController {
 
     //méthode pour traiter le formulaire d'ajout
     @PostMapping("/index_reservation/new_reservation/{id}")
-    public String addClientToCours(@PathVariable(value = "id") long id, @RequestParam("clientId") long clientId, Model model) {
+    public String addClientToCours(@PathVariable(value = "id") long id, @RequestParam("clientId") long clientId) {
         Cours cours = coursService.getCoursById(id);
         Client client = clientService.getClientById(clientId);
 
         if(cours.getClients().contains(client) || client.getCours().contains(cours)) {
-            model.addAttribute("errorMessage", "Ce client est déjà inscrit à ce cours.");
-            return "index_reservation/new_reservation/{id}";
-
-        } else if (cours.getClients().size() < 5) {
-            System.out.println("ok");
+            return "redirect:/index_reservation/new_reservation/{id}?same=true";
+        } else if(cours.getClients().size() < 5) {
             cours.getClients().add(client);
             client.getCours().add(cours); //+
             coursService.saveCours(cours);
             return "redirect:/index_reservation";
         } else {
-
-            return "redirect:/index_reservation/new_reservation/{id}?full=true";//
+            return "redirect:/index_reservation/new_reservation/{id}?full=true";
         }
 
     }

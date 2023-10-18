@@ -27,7 +27,7 @@
                 <td th:text="${cours.nom}"></td>
                 <td th:text="${#dates.format(cours.date, 'dd/MM/yyyy')}"></td>
                 <td th:text="${cours.coach.nom}"></td>
-                <td th:text="${cours.clients.size()} + '/ 20'"></td>
+                <td th:text="${cours.clients.size()} + '/ 5'"></td>
                 <td ></td>
                 <td>
                     <a th:href="@{/index_reservation/new_reservation/{id}(id=${cours.id})}" class="btn btn-primary">Ajouter un client</a>
