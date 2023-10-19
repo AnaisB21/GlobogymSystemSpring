@@ -1,4 +1,4 @@
-package fr.m2i.globogymsystemspring.security.controller;
+package fr.m2i.globogymsystemspring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
