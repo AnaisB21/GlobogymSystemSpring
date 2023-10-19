@@ -1,5 +1,6 @@
 package fr.m2i.globogymsystemspring.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
