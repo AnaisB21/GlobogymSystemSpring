@@ -30,6 +30,7 @@ public class SecurityConfig {
                 auth -> {
                     auth.requestMatchers("/admin").hasRole("ADMIN");
                     auth.requestMatchers("/user").hasRole("USER");
+                    auth.requestMatchers("/api/**").permitAll();
                     auth.anyRequest().authenticated();
                 }).formLogin(Customizer.withDefaults()).build();
     }
@@ -45,5 +46,6 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 }
