@@ -10,5 +10,6 @@ public interface CoursService {
     Cours getCoursById(long id);
     void deleteCoursById(long id);
     void detachCoachFromCours(Cours cours);
+    List<Cours> getLatestCours(int count);
 
 }

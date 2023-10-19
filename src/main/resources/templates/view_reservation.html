@@ -5,32 +5,45 @@
     <title>Liste des réservations</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div th:replace="/navbar.html"></div>
 
-    <div class="container">
-        <h1>Liste des clients inscrits au cours : <br> > <span th:text="${cours.nom}"></span></h1>
-        <br>
-        <table border="1" class="table table-striped table-responsive-md">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="client : ${cours.clients}">
-                    <td th:text="${client.nom}"></td>
-                    <td th:text="${client.prenom}"></td>
-                    <td>
-                        <a th:href="@{/index_reservation/remove_reservation(coursId=${cours.id}, clientId=${client.id})}" class="btn btn-danger">Supprimer</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <a th:href="@{/index_reservation}">Retour aux réservations</a>
+    <section class="py-1 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-normal">Clients inscrits au cours</h1>
+                <hr>
+                <p class="lead text-body-primary"><span th:text="${cours.nom}"></span> </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 ">
+            <div class="h-100 p-5 bg-body-tertiary border rounded-4 align-self-center">
+                <table border="1" class="table table-striped table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="client : ${cours.clients}">
+                            <td th:text="${client.nom}" class="col-1"></td>
+                            <td th:text="${client.prenom}" class="col-1"></td>
+                            <td class="col-1">
+                                <a th:href="@{/index_reservation/remove_reservation(coursId=${cours.id}, clientId=${client.id})}" class="btn btn-secondary">Supprimer</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a th:href="@{/index_reservation}">Retour aux réservations</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

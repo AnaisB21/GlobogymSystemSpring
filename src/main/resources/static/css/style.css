@@ -1,4 +1,11 @@
 body {
-    background-color: floralwhite;
+    background: linear-gradient(90deg, #1f4037, #99f2c8);
+}
 
+h1 {
+    font-weight: bold;
+}
+
+.card-text {
+    font-weight: normal;
 }

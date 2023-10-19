@@ -11,16 +11,51 @@
 <body>
     <div th:replace="/navbar.html"></div>
 
-    <div class="container my-2">
-        <h1>Globogym System</h1>
-        <hr>
-        <a th:href="@{/index_client}"> Gestion client</a>
-        <hr>
-        <a th:href="@{/index_coach}"> Gestion coach</a>
-        <hr>
-        <a th:href="@{/index_cours}"> Gestion cours</a>
-        <hr>
-        <a th:href="@{/index_reservation}"> Gestion réservation</a>
-    </div>
+
+    <main>
+
+        <section class="py-1 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-normal">Bienvenue</h1>
+                    <hr>
+                    <p class="lead text-body-primary">Globogym System vous permet de gérer en toute simplicité le planning de réservation de votre salle de sport.</p>
+                    <p class="lead text-body-primary">Vous pouvez y effectuer la gestion de vos coachs, cours et client. </p>
+
+                </div>
+            </div>
+        </section>
+
+
+        <div class="album py-3 bg-body-tertiary">
+
+            <div class="container">
+                <p>Voici les derniers cours ajoutés : </p>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" th:each="cours : ${listCours}">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                                <title>Placeholder</title>
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <image href="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2FsbGUlMjBkZSUyMHNwb3J0fGVufDB8MHwwfHx8MA%3D%3D"/>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em" th:text="${cours.nom}"></text>
+                            </svg>
+                            <div class="card-body">
+                                <p class="card-text">Cours : <span th:text="${cours.nom}"></span></p>
+                                <p class="card-text"> Le : <span th:text="${#dates.format(cours.date, 'dd/MM/yyyy')}"></span></p>
+                                <p class="card-text">Avec : <span th:text="${cours.coach.nom}"></span></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a th:href="@{/index_cours}"><button type="button" class="btn btn-sm btn-outline-secondary" >Voir</button></a>
+                                        <a th:href="@{/index_reservation}"><button type="button" class="btn btn-sm btn-outline-secondary" >Réserver</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
