@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:replace="/navbar.html"></div>
+    <div th:replace="~{/navbar.html}"></div>
 
     <section class="py-1 text-center container">
         <div class="row py-lg-5">
@@ -28,9 +28,9 @@
                 <h2 class="fw-normal fs-3" >Ajout client</h2>
                 <br>
                 <form action="#" th:action="@{/saveClient}" th:object="${client}" method="POST">
-                    <input type="text" th:field="*{nom}" placeholder="Nom client" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{nom}" placeholder="Nom client" class="form-control mb-4 col-4" required>
 
-                    <input type="text" th:field="*{prenom}" placeholder="Prénom client" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{prenom}" placeholder="Prénom client" class="form-control mb-4 col-4" required>
 
                     <button type="submit" class="btn btn-info col-2"> Enregistrer</button>
                 </form>
