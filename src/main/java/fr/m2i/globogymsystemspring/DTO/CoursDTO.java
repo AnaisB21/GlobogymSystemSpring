@@ -14,4 +14,5 @@ public class CoursDTO {
     private Date date;
     private CoachDTO coach;
     private List<ClientDTO> reservations;
+    private String image;
 }
