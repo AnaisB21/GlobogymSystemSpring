@@ -1,7 +1,7 @@
 package fr.m2i.globogymsystemspring.security.services;
 
-import fr.m2i.globogymsystemspring.security.entities.DBUser;
-import fr.m2i.globogymsystemspring.security.repositories.DBUserRepository;
+import fr.m2i.globogymsystemspring.model.DBUser;
+import fr.m2i.globogymsystemspring.repository.DBUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
