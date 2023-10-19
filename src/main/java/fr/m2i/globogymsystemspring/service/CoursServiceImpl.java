@@ -5,6 +5,7 @@ import fr.m2i.globogymsystemspring.repository.CoursRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,4 +49,10 @@ public class CoursServiceImpl implements CoursService {
             coursRepository.save(cours);
         }
     }
+
+    @Override
+    public List<Cours> getLatestCours(int count) {
+        return coursRepository.findCoursByDateDesc(PageRequest.of(0,count)).getContent();
+    }
+
 }
