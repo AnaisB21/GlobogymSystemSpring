@@ -3,6 +3,7 @@ package fr.m2i.globogymsystemspring.service;
 import fr.m2i.globogymsystemspring.model.DBUser;
 import fr.m2i.globogymsystemspring.repository.DBUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,14 @@ public class UserService {
     @Autowired
     private DBUserRepository dbUserRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public List<DBUser> getAllUsers() {
         return dbUserRepository.findAll();
     }
     public void saveUser(DBUser user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         dbUserRepository.save(user);
     }
 
