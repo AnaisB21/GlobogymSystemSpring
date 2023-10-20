@@ -1,5 +1,6 @@
 package fr.m2i.globogymsystemspring.controller;
 
+
 import fr.m2i.globogymsystemspring.model.DBUser;
 import fr.m2i.globogymsystemspring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +21,7 @@ import static java.util.stream.Collectors.toList;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/cours")
 public class RestCoursController {
 
@@ -25,12 +29,13 @@ public class RestCoursController {
 
     @GetMapping
     @ResponseBody
-    public List<CoursDTO> getCours() {
-        return cs.getAllCours()
-                .stream()
-                .map(Mapper::coursToDTO)
-                .collect(toList());
-    }
 
+    public ResponseEntity<List<CoursDTO>> getCours() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(cs.getAllCours()
+                        .stream()
+                        .map(Mapper::coursToDTO)
+                        .collect(toList()));
+    }
 
 }

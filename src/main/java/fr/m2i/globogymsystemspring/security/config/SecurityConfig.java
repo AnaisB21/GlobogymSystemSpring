@@ -30,10 +30,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     //auth.requestMatchers("/user").hasRole("USER");
+
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(Customizer.withDefaults())
-
                 .build();
     }
 
@@ -48,5 +48,6 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 }
