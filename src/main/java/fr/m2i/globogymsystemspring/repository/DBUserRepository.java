@@ -1,6 +1,6 @@
-package fr.m2i.globogymsystemspring.security.repositories;
+package fr.m2i.globogymsystemspring.repository;
 
-import fr.m2i.globogymsystemspring.security.entities.DBUser;
+import fr.m2i.globogymsystemspring.model.DBUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DBUserRepository extends JpaRepository<DBUser, Long> {

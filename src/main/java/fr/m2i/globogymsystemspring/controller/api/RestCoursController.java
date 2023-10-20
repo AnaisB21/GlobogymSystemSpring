@@ -1,4 +1,4 @@
-package fr.m2i.globogymsystemspring.controller;
+package fr.m2i.globogymsystemspring.controller.api;
 
 import fr.m2i.globogymsystemspring.DTO.CoursDTO;
 import fr.m2i.globogymsystemspring.DTO.Mapper;

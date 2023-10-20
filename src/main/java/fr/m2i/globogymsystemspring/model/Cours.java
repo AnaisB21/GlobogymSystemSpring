@@ -32,7 +32,8 @@ public class Cours {
     @JoinColumn(name="coach_id")
     private Coach coach;
 
-    @ManyToMany(mappedBy = "cours", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(mappedBy = "cours", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+
     private List<Client> clients = new ArrayList<>();
 
 }

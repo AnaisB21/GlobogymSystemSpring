@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion utilisateur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <div th:replace="/navbar.html"></div>
+
+    <section class="py-1 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-normal">Gestion utilisateur</h1>
+          <hr>
+        </div>
+      </div>
+    </section>
+
+    <div class="row justify-content-center">
+      <div class="col-md-6 ">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-4 align-self-center">
+          <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>Nom utilisateur</th>
+                    <th>Rôle</th>
+                    <th>Mot de passe</th>
+                  <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${listUsers}">
+                    <td th:text="${user.username}" class="col-1"></td>
+                    <td th:text="${user.role}" class="col-1"></td>
+                    <td th:password="${user.password}" class="col-1"></td>
+                    <td class="col-1"> <a th:href="@{/admin/showFormForUpdateUser/{id}(id=${user.id})}" class="btn btn-light">Modifier</a>
+                        <a th:href="@{/admin/deleteUser/{id}(id=${user.id})}" class="btn btn-secondary">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

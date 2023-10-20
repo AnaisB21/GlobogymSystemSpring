@@ -1,4 +1,4 @@
-package fr.m2i.globogymsystemspring.security.entities;
+package fr.m2i.globogymsystemspring.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
