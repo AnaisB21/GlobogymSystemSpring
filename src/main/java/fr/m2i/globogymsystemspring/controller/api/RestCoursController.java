@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class RestCoursController {
 
     @GetMapping
     @ResponseBody
+
     public ResponseEntity<List<CoursDTO>> getCours() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(cs.getAllCours()
